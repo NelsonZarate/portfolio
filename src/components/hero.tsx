@@ -25,7 +25,7 @@ export function Hero() {
         animate="visible"
         custom={0}
       >
-        Olá, eu sou <span className="text-primary">Seu Nome</span>
+        Olá, eu sou <span className="text-primary">Nelson Zarate</span>
       </motion.h1>
 
       <motion.p
@@ -35,7 +35,7 @@ export function Hero() {
         animate="visible"
         custom={1}
       >
-        Desenvolvedor Full Stack especializado em React &amp; Next.js
+        Desenvolvedor Full Stack especializado em React &amp; Next.js, e em backend com python e django. Tenho experiência em desenvolvimento de aplicações web escaláveis e de alta performance, com foco em usabilidade, design responsivo e escalabilidade. 
       </motion.p>
 
       <motion.div
@@ -45,10 +45,10 @@ export function Hero() {
         animate="visible"
         custom={2}
       >
-        <Button render={<a href="#projetos" />} size="lg">
+        <Button render={<a href="#projetos" />} nativeButton={false} size="lg">
           Ver Projetos
         </Button>
-        <Button render={<a href="#contato" />} variant="outline" size="lg">
+        <Button render={<a href="#contato" />} nativeButton={false} variant="outline" size="lg">
           Contato
         </Button>
       </motion.div>
