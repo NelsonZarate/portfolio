@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "home": "Início",
+    "projects": "Projetos",
+    "techStack": "Tech Stack",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Olá,",
+    "name": "Sou o Nelson Zarate",
+    "role": "Full Stack Developer",
+    "contact": "Contacto"
+  },
+  "projects": {
+    "title": "Projetos"
+  },
+  "contact": {
+    "title": "Contacto",
+    "name": "Nome",
+    "namePlaceholder": "O seu nome",
+    "email": "Email",
+    "emailPlaceholder": "seu@email.com",
+    "message": "Mensagem",
+    "messagePlaceholder": "A sua mensagem...",
+    "send": "Enviar Mensagem",
+    "sending": "A enviar...",
+    "sent": "Mensagem enviada!",
+    "sentDescription": "Obrigado pelo contacto. Responderei em breve.",
+    "errorName": "Nome é obrigatório",
+    "errorEmail": "Email é obrigatório",
+    "errorEmailInvalid": "Email inválido",
+    "errorMessage": "Mensagem é obrigatória"
+  },
+  "techStack": {
+    "title": "Tech Stack",
+    "subtitle": "As tecnologias que uso para criar aplicações modernas, rápidas e escaláveis.",
+    "description": "Frontend com React & Next.js, backend com Django & Node.js, bases de dados SQL e NoSQL, e ferramentas modernas de deployment.",
+    "coreStack": "A Minha Core Stack",
+    "coreStackDescription": "A combinação principal que uso nos meus projetos.",
+    "cta": "Queres ver estas tecnologias em ação?",
+    "ctaDescription": "Explora os meus projetos e vê como aplico esta stack em soluções reais.",
+    "ctaButton": "Ver Projetos",
+    "frontend": "Frontend",
+    "frontendDesc": "Interfaces rápidas, responsivas e acessíveis.",
+    "backend": "Backend",
+    "backendDesc": "APIs robustas, seguras e escaláveis.",
+    "databases": "Bases de Dados",
+    "databasesDesc": "Armazenamento e gestão eficiente de dados.",
+    "tools": "Ferramentas & Deployment",
+    "toolsDesc": "Ferramentas que aceleram o desenvolvimento e deployment."
+  },
+  "about": {
+    "title": "Sobre Mim",
+    "description": "Desenvolvedor Full Stack especializado em React, Next.js, e Python/Django. Apaixonado por construir aplicações web escaláveis com ótimas experiências de utilizador."
+  }
+}

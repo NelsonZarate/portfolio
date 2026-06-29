@@ -9,6 +9,13 @@ export function HorizontalScroll({ children, sectionIds }: { children: ReactNode
   const items = Children.toArray(children);
   const total = items.length;
 
+  // Notify navbar of section changes
+  useEffect(() => {
+    if (sectionIds && sectionIds[current]) {
+      window.dispatchEvent(new CustomEvent("section-changed", { detail: sectionIds[current] }));
+    }
+  }, [current, sectionIds]);
+
   useEffect(() => {
     function handleWheel(e: WheelEvent) {
       e.preventDefault();

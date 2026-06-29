@@ -1,32 +1,61 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { LanguageToggle } from "@/components/layout/language-toggle";
 
-const links = [
-  { id: "home", label: "Home" },
-  { id: "projetos", label: "Projects" },
-  { id: "contato", label: "Contact" },
+const linkDefs: { id: string; labelKey: string; href?: string }[] = [
+  { id: "home", labelKey: "home" },
+  { id: "projetos", labelKey: "projects" },
+  { id: "tech-stack", labelKey: "techStack", href: "/tech-stack" },
+  { id: "contato", labelKey: "contact" },
 ];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
   const pathname = usePathname();
   const router = useRouter();
+  const t = useTranslations("nav");
 
-  function handleNav(id: string) {
-    if (pathname === "/") {
-      // On homepage: dispatch event to HorizontalScroll
-      window.dispatchEvent(new CustomEvent("navigate-section", { detail: id }));
+  const links = linkDefs.map((l) => ({ ...l, label: t(l.labelKey) }));
+
+  // Listen for section changes from HorizontalScroll
+  useEffect(() => {
+    function onSectionChange(e: Event) {
+      setActiveSection((e as CustomEvent).detail);
+    }
+    window.addEventListener("section-changed", onSectionChange);
+    return () => window.removeEventListener("section-changed", onSectionChange);
+  }, []);
+
+  function isActive(link: typeof links[number]): boolean {
+    if (link.href) {
+      return pathname.includes(link.href);
+    }
+    const isHome = /^\/[a-z]{2}\/?$/.test(pathname);
+    return isHome && activeSection === link.id;
+  }
+
+  function handleNav(link: typeof links[number]) {
+    if (isActive(link)) return; // Don't navigate if already active
+
+    if (link.href) {
+      router.push(link.href);
+      return;
+    }
+    const isHome = pathname.match(/^\/[a-z]{2}\/?$/);
+    if (isHome) {
+      window.dispatchEvent(new CustomEvent("navigate-section", { detail: link.id }));
     } else {
-      // On other pages: navigate to homepage then trigger section
       router.push("/");
       setTimeout(() => {
-        window.dispatchEvent(new CustomEvent("navigate-section", { detail: id }));
+        window.dispatchEvent(new CustomEvent("navigate-section", { detail: link.id }));
       }, 300);
     }
   }
@@ -34,27 +63,40 @@ export function Navbar() {
   return (
     <header className="fixed top-0 z-50 w-full bg-background/60 backdrop-blur-md">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <button onClick={() => handleNav("home")} className="text-xl font-bold text-foreground">
+        <button onClick={() => handleNav(links[0])} className="text-xl font-bold text-foreground">
           NZ
         </button>
 
         <div className="hidden md:flex items-center gap-8">
-          {links.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => handleNav(link.id)}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              {link.label}
-            </button>
-          ))}
+          {links.map((link) => {
+            const active = isActive(link);
+            return (
+              <button
+                key={link.id}
+                onClick={() => handleNav(link)}
+                disabled={active}
+                className={`relative text-sm pb-1 transition-colors ${
+                  active
+                    ? "text-foreground cursor-default"
+                    : "text-muted-foreground hover:text-primary"
+                }`}
+              >
+                {link.label}
+                {active && (
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full" />
+                )}
+              </button>
+            );
+          })}
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-2">
+          <LanguageToggle />
           <ThemeToggle />
         </div>
 
         <div className="flex md:hidden items-center gap-2">
+          <LanguageToggle />
           <ThemeToggle />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger render={<Button variant="ghost" size="icon" />}>
@@ -62,15 +104,23 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="w-64">
               <nav className="flex flex-col gap-4 mt-8">
-                {links.map((link) => (
-                  <button
-                    key={link.id}
-                    onClick={() => { handleNav(link.id); setOpen(false); }}
-                    className="text-left text-lg text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </button>
-                ))}
+                {links.map((link) => {
+                  const active = isActive(link);
+                  return (
+                    <button
+                      key={link.id}
+                      onClick={() => { if (!active) { handleNav(link); setOpen(false); } }}
+                      disabled={active}
+                      className={`text-left text-lg transition-colors ${
+                        active
+                          ? "text-foreground font-semibold border-l-2 border-primary pl-3 cursor-default"
+                          : "text-muted-foreground hover:text-primary"
+                      }`}
+                    >
+                      {link.label}
+                    </button>
+                  );
+                })}
               </nav>
             </SheetContent>
           </Sheet>

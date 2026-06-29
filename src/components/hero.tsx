@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 import Image from "next/image";
@@ -37,6 +38,7 @@ const socials = [
 ];
 
 export function Hero() {
+  const t = useTranslations("hero");
   return (
     <section
       id="home"
@@ -53,11 +55,11 @@ export function Hero() {
             animate="visible"
             custom={0}
           >
-            Hi,
+            {t("greeting")}
             <br />
-            I&apos;m <span className="text-primary">Nelson Zarate</span>
+            <span className="text-primary">{t("name")}</span>
             <br />
-            Full Stack Developer
+            {t("role")}
           </motion.h1>
 
           <motion.div
@@ -72,7 +74,7 @@ export function Hero() {
               size="lg"
               className="bg-primary text-primary-foreground hover:bg-primary/90 px-8"
             >
-              Contact
+              {t("contact")}
             </Button>
           </motion.div>
 

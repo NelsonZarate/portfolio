@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "techStack": "Tech Stack",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi,",
+    "name": "I'm Nelson Zarate",
+    "role": "Full Stack Developer",
+    "contact": "Contact"
+  },
+  "projects": {
+    "title": "Projects"
+  },
+  "contact": {
+    "title": "Contact",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "message": "Message",
+    "messagePlaceholder": "Your message...",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "sent": "Message sent!",
+    "sentDescription": "Thanks for reaching out. I'll reply soon.",
+    "errorName": "Name is required",
+    "errorEmail": "Email is required",
+    "errorEmailInvalid": "Invalid email",
+    "errorMessage": "Message is required"
+  },
+  "techStack": {
+    "title": "Tech Stack",
+    "subtitle": "The technologies I use to build modern, fast and scalable applications.",
+    "description": "Frontend with React & Next.js, backend with Django & Node.js, SQL and NoSQL databases, and modern deployment tools.",
+    "coreStack": "My Core Stack",
+    "coreStackDescription": "The main combination I use in my projects.",
+    "cta": "Want to see these technologies in action?",
+    "ctaDescription": "Explore my projects and see how I apply this stack in real solutions.",
+    "ctaButton": "View Projects",
+    "frontend": "Frontend",
+    "frontendDesc": "Fast, responsive and accessible interfaces.",
+    "backend": "Backend",
+    "backendDesc": "Robust, secure and scalable APIs.",
+    "databases": "Databases",
+    "databasesDesc": "Efficient data storage and management.",
+    "tools": "Tools & Deployment",
+    "toolsDesc": "Tools that accelerate development and deployment."
+  },
+  "about": {
+    "title": "About Me",
+    "description": "Full Stack Developer specializing in React, Next.js, and Python/Django. Passionate about building scalable web applications with great user experiences."
+  }
+}
