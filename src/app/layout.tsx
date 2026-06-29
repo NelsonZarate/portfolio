@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { DotGrid } from "@/components/dot-grid";
+import { ThemeProvider } from "@/components/layout/theme-provider";
+import { Navbar } from "@/components/layout/navbar";
+import { NetworkBackground } from "@/components/layout/network-background";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Meu portfólio pessoal",
+  title: "Nelson Zarate | Portfolio",
+  description: "Full Stack Developer Portfolio",
 };
 
 export default function RootLayout({
@@ -30,14 +29,13 @@ export default function RootLayout({
     <html
       lang="pt"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="h-screen overflow-hidden">
         <ThemeProvider>
-          <DotGrid />
+          <NetworkBackground />
           <Navbar />
-          <main className="flex-1 pt-16">{children}</main>
-          <Footer />
+          <main>{children}</main>
         </ThemeProvider>
       </body>
     </html>
