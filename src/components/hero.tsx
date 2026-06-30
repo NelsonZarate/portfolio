@@ -42,6 +42,7 @@ export function Hero() {
   return (
     <section
       id="home"
+      aria-label={t("greeting") + " " + t("name") + " — " + t("role")}
       className="relative flex items-center justify-center min-h-screen px-6 md:px-12"
     >
       <FloatingProjectBackground />
@@ -108,14 +109,15 @@ export function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          <div className="relative sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px] rounded-2xl overflow-hidden">
+          <div className="relative w-56 h-56 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px]">
             <Image
-              src="/assets/nelson.jpg"
-              alt="Nelson Zarate"
+              src="/assets/nelson.png"
+              alt="Portrait of Nelson Zarate, Full Stack Developer"
               fill
               priority
-              className="object-cover pointer-events-none"
-              sizes="(max-width: 640px) 320px, (max-width: 1024px) 360px, 840px"
+              unoptimized
+              className="object-contain pointer-events-none"
+              sizes="(max-width: 640px) 224px, (max-width: 1024px) 320px, 420px"
               quality={85}
             />
           </div>

@@ -17,20 +17,20 @@ const categoryDescriptions: Record<string, string> = {
   "Tools & Deployment": "Ferramentas que aceleram o desenvolvimento e deployment.",
 };
 
-export default function TechStackPage() {
+export default function TechStackContent() {
   return (
     <HorizontalScroll>
       {/* Section 1: Hero + Featured Stack */}
-      <div className="w-screen h-screen flex flex-col items-center justify-center px-4 sm:px-6 overflow-y-auto">
+      <div className="w-screen h-screen flex flex-col items-center justify-center px-6">
         <TechStackHero />
-        <div className="max-w-6xl w-full px-4 sm:px-6">
+        <div className="max-w-6xl w-full px-6">
           <FeaturedStack />
         </div>
       </div>
 
       {/* Section 2-5: Each category */}
       {categories.map((cat) => (
-        <div key={cat} className="w-screen h-screen flex items-center justify-center px-4 sm:px-6 overflow-y-auto py-16">
+        <div key={cat} className="w-screen h-screen flex items-center justify-center px-6">
           <div className="max-w-5xl w-full">
             <TechCategorySection
               title={cat}
@@ -42,10 +42,10 @@ export default function TechStackPage() {
       ))}
 
       {/* Section 6: CTA */}
-      <div className="w-screen h-screen flex items-center justify-center px-4 sm:px-6">
-        <div className="text-center space-y-4 max-w-sm sm:max-w-md">
-          <h2 className="text-2xl sm:text-3xl font-bold">Queres ver estas tecnologias em ação?</h2>
-          <p className="text-sm sm:text-base text-muted-foreground mx-auto">Explora os meus projetos e vê como aplico esta stack em soluções reais.</p>
+      <div className="w-screen h-screen flex items-center justify-center px-6">
+        <div className="text-center space-y-4">
+          <h2 className="text-3xl font-bold">Queres ver estas tecnologias em ação?</h2>
+          <p className="text-muted-foreground max-w-md mx-auto">Explora os meus projetos e vê como aplico esta stack em soluções reais.</p>
           <Button render={<Link href="/" />} nativeButton={false} size="lg" onClick={() => setTimeout(() => window.dispatchEvent(new CustomEvent("navigate-section", { detail: "projetos" })), 300)}>
             Ver Projetos
           </Button>

@@ -51,29 +51,52 @@ export function Contact() {
     <section id="contato" className="py-20 px-4">
       <div className="mx-auto max-w-md">
         <h2 className="text-3xl font-bold text-center mb-8">Contato</h2>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
           <div className="space-y-2">
             <Label htmlFor="name">Nome</Label>
-            <Input id="name" name="name" placeholder="Seu nome" />
+            <Input
+              id="name"
+              name="name"
+              placeholder="Seu nome"
+              aria-invalid={!!errors.name}
+              aria-describedby={errors.name ? "name-error" : undefined}
+              className="focus-visible:ring-2 focus-visible:ring-primary"
+            />
             {errors.name && (
-              <p className="text-sm text-destructive">{errors.name}</p>
+              <p id="name-error" className="text-sm text-destructive" role="alert">{errors.name}</p>
             )}
           </div>
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" name="email" type="email" placeholder="seu@email.com" />
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="seu@email.com"
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? "email-error" : undefined}
+              className="focus-visible:ring-2 focus-visible:ring-primary"
+            />
             {errors.email && (
-              <p className="text-sm text-destructive">{errors.email}</p>
+              <p id="email-error" className="text-sm text-destructive" role="alert">{errors.email}</p>
             )}
           </div>
           <div className="space-y-2">
             <Label htmlFor="message">Mensagem</Label>
-            <Textarea id="message" name="message" placeholder="Sua mensagem..." rows={5} />
+            <Textarea
+              id="message"
+              name="message"
+              placeholder="Sua mensagem..."
+              rows={5}
+              aria-invalid={!!errors.message}
+              aria-describedby={errors.message ? "message-error" : undefined}
+              className="focus-visible:ring-2 focus-visible:ring-primary"
+            />
             {errors.message && (
-              <p className="text-sm text-destructive">{errors.message}</p>
+              <p id="message-error" className="text-sm text-destructive" role="alert">{errors.message}</p>
             )}
           </div>
-          <Button type="submit" disabled={status === "sending"}>
+          <Button type="submit" disabled={status === "sending"} className="focus-visible:ring-2 focus-visible:ring-primary">
             {status === "sending" ? "Enviando..." : "Enviar Mensagem"}
           </Button>
         </form>

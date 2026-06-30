@@ -14,11 +14,28 @@ interface ProjectModalProps {
 
 export function ProjectModal({ isOpen, onClose, title, demoUrl }: ProjectModalProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isOpen) return;
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
+      // Focus trap: keep focus within dialog
+      if (e.key === "Tab" && dialogRef.current) {
+        const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener("keydown", handleKey);
     closeRef.current?.focus();
@@ -33,13 +50,14 @@ export function ProjectModal({ isOpen, onClose, title, demoUrl }: ProjectModalPr
     <AnimatePresence>
       {isOpen && (
         <motion.div
+          ref={dialogRef}
           className="fixed inset-0 z-[100] flex items-center justify-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           role="dialog"
           aria-modal="true"
-          aria-label={`Demo: ${title}`}
+          aria-labelledby="project-modal-title"
         >
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
           <motion.div
@@ -55,7 +73,7 @@ export function ProjectModal({ isOpen, onClose, title, demoUrl }: ProjectModalPr
                 <span className="w-3 h-3 rounded-full bg-red-400" />
                 <span className="w-3 h-3 rounded-full bg-yellow-400" />
                 <span className="w-3 h-3 rounded-full bg-green-400" />
-                <span className="ml-3 text-xs text-muted-foreground truncate max-w-[200px] sm:max-w-none">{title}</span>
+                <span id="project-modal-title" className="ml-3 text-xs text-muted-foreground truncate max-w-[200px] sm:max-w-none">{title}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Button

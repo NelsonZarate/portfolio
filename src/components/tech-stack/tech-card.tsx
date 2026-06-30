@@ -18,14 +18,14 @@ export function TechCard({ tech }: { tech: Tech }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       whileHover={{ scale: 1.03, borderColor: "var(--primary)" }}
-      className="rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm p-5 space-y-3 transition-shadow duration-300 hover:shadow-lg hover:shadow-primary/5"
+      className="rounded-xl sm:rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm p-3 sm:p-5 space-y-1.5 sm:space-y-3 transition-shadow duration-300 hover:shadow-lg hover:shadow-primary/5"
     >
       <div className="flex items-center justify-between">
-        <Icon className="w-8 h-8 text-foreground" />
-        <span className={`text-[11px] font-medium ${levelColors[tech.level]}`}>{tech.level}</span>
+        <Icon className="w-5 h-5 sm:w-8 sm:h-8 text-foreground" />
+        <span className={`text-[10px] sm:text-[11px] font-medium ${levelColors[tech.level]}`}>{tech.level}</span>
       </div>
-      <h3 className="font-semibold">{tech.name}</h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">{tech.description}</p>
+      <h3 className="font-semibold text-sm sm:text-base">{tech.name}</h3>
+      <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed hidden sm:block">{tech.description}</p>
     </motion.div>
   );
 }

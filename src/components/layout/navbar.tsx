@@ -63,7 +63,7 @@ export function Navbar() {
   return (
     <header className="fixed top-0 z-50 w-full bg-background/60 backdrop-blur-md">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <button onClick={() => handleNav(links[0])} className="text-xl font-bold text-foreground">
+        <button onClick={() => handleNav(links[0])} className="text-xl font-bold text-foreground" aria-label="Nelson Zarate - Home">
           NZ
         </button>
 
@@ -75,7 +75,8 @@ export function Navbar() {
                 key={link.id}
                 onClick={() => handleNav(link)}
                 disabled={active}
-                className={`relative text-sm pb-1 transition-colors ${
+                aria-current={active ? "page" : undefined}
+                className={`relative text-sm pb-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:rounded-sm ${
                   active
                     ? "text-foreground cursor-default"
                     : "text-muted-foreground hover:text-primary"
@@ -99,11 +100,11 @@ export function Navbar() {
           <LanguageToggle />
           <ThemeToggle />
           <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger render={<Button variant="ghost" size="icon" />}>
+            <SheetTrigger render={<Button variant="ghost" size="icon" aria-label="Open navigation menu" />}>
               <Menu className="h-5 w-5" />
             </SheetTrigger>
-            <SheetContent side="right" className="w-64">
-              <nav className="flex flex-col gap-4 mt-8">
+            <SheetContent side="right" className="w-64" aria-label="Navigation menu">
+              <nav className="flex flex-col gap-4 mt-8" aria-label="Mobile navigation">
                 {links.map((link) => {
                   const active = isActive(link);
                   return (
@@ -111,7 +112,8 @@ export function Navbar() {
                       key={link.id}
                       onClick={() => { if (!active) { handleNav(link); setOpen(false); } }}
                       disabled={active}
-                      className={`text-left text-lg transition-colors ${
+                      aria-current={active ? "page" : undefined}
+                      className={`text-left text-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:rounded-sm ${
                         active
                           ? "text-foreground font-semibold border-l-2 border-primary pl-3 cursor-default"
                           : "text-muted-foreground hover:text-primary"
